@@ -76,6 +76,21 @@ distrib_java_import(
     ],
 )
 
+# This target only contains the jars that are used for building / running Bazel.
+# The target below is for the Android tools that are not shipped with Bazel.
+distrib_java_import(
+    name = "android_common_30_1_3_lite",
+    enable_distributions = ["debian"],
+    jars = [
+        "android_common/30.1.3/com.android.tools.layoutlib_layoutlib-api_30.1.3.jar",
+        "android_common/30.1.3/com.android.tools_sdk-common_30.1.3.jar",
+        "android_common/30.1.3/com.android.tools_repository_30.1.3.jar",
+    ],
+    deps = [
+        "//third_party/jaxb",
+    ],
+)
+
 java_import(
     name = "android-annotations",
     jars = ["android_common/com.android_annotations_25.0.0.jar"],
@@ -104,6 +119,39 @@ java_import(
         "android_common/com.android.tools_repository_25.0.0.jar",
         "android_common/com.android.tools_sdk-common_25.0.0-patched.jar",
         "android_common/com.android.tools_sdklib_25.0.0.jar",
+    ],
+    runtime_deps = [
+        ":asm",
+        ":asm-analysis",
+        ":asm-tree",
+    ],
+    deps = [
+        "//third_party/jaxb",
+    ],
+)
+
+java_import(
+    name = "android_common_30_1_3",
+    jars = [
+        "android_common/30.1.3/com.android_signflinger_7.1.3.jar",
+        "android_common/30.1.3/com.android.tools.analytics-library_protos_30.1.3.jar",
+        "android_common/30.1.3/com.android.tools.analytics-library_shared_30.1.3.jar",
+        "android_common/30.1.3/com.android.tools.analytics-library_tracker_30.1.3.jar",
+        "android_common/30.1.3/com.android.tools_annotations_30.1.3.jar",
+        "android_common/30.1.3/com.android.tools.build_apksig_7.1.3.jar",
+        "android_common/30.1.3/com.android.tools.build_apkzlib_7.1.3.jar",
+        "android_common/30.1.3/com.android.tools.build_builder_7.1.3.jar",
+        "android_common/30.1.3/com.android.tools.build_builder-model_7.1.3.jar",
+        "android_common/30.1.3/com.android.tools.build_builder-test-api_7.1.3.jar",
+        "android_common/30.1.3/com.android.tools.build_manifest-merger_30.1.3.jar",
+        "android_common/30.1.3/com.android.tools_common_30.1.3.jar",
+        "android_common/30.1.3/com.android.tools.ddms_ddmlib_30.1.3.jar",
+        "android_common/30.1.3/com.android.tools_dvlib_30.1.3.jar",
+        "android_common/30.1.3/com.android.tools.layoutlib_layoutlib-api_30.1.3.jar",
+        "android_common/30.1.3/com.android.tools_repository_30.1.3.jar",
+        "android_common/30.1.3/com.android.tools_sdk-common_30.1.3.jar",
+        "android_common/30.1.3/com.android.tools_sdklib_30.1.3.jar",
+        "android_common/30.1.3/com.android_zipflinger_7.1.3.jar",
     ],
     runtime_deps = [
         ":asm",
@@ -239,9 +287,9 @@ java_plugin(
 
 distrib_java_import(
     name = "auto_common",
+    applicable_licenses = [":auto_license"],
     enable_distributions = ["debian"],
     jars = ["auto/auto-common-1.1.2.jar"],
-    applicable_licenses = [":auto_license"],
 )
 
 license(
@@ -451,6 +499,7 @@ filegroup(
 
 distrib_java_import(
     name = "guava",
+    applicable_licenses = [":guava_license"],
     enable_distributions = ["debian"],
     jars = [
         "guava/failureaccess-1.0.1.jar",
@@ -461,7 +510,6 @@ distrib_java_import(
         ":jcip_annotations",
         ":jsr305",
     ],
-    applicable_licenses = [":guava_license"],
 )
 
 license(
@@ -475,13 +523,13 @@ license(
 
 distrib_java_import(
     name = "flogger",
+    applicable_licenses = [":flogger_license"],
     enable_distributions = ["debian"],
     jars = [
         "flogger/flogger-0.5.1.jar",
         "flogger/flogger-system-backend-0.5.1.jar",
         "flogger/google-extensions-0.5.1.jar",
     ],
-    applicable_licenses = [":flogger_license"],
 )
 
 license(
@@ -743,6 +791,7 @@ java_import(
 
 java_import(
     name = "truth",
+    applicable_licenses = [":truth_license"],
     jars = ["truth/truth-1.0.1.jar"],
     exports = [
         ":truth8",
@@ -751,7 +800,6 @@ java_import(
     deps = [
         ":diffutils",
     ],
-    applicable_licenses = [":truth_license"],
 )
 
 license(
@@ -765,8 +813,8 @@ license(
 
 java_import(
     name = "truth8",
-    jars = ["truth8/truth-java8-extension-1.0.1.jar"],
     applicable_licenses = [":truth8_license"],
+    jars = ["truth8/truth-java8-extension-1.0.1.jar"],
 )
 
 license(
@@ -780,11 +828,11 @@ license(
 
 java_import(
     name = "truth_proto",
+    applicable_licenses = [":truth_proto_license"],
     jars = [
         "truth_proto/truth-liteproto-extension-1.0.1.jar",
         "truth_proto/truth-proto-extension-1.0.1.jar",
     ],
-    applicable_licenses = [":truth_proto_license"],
 )
 
 license(
@@ -798,9 +846,9 @@ license(
 
 distrib_java_import(
     name = "xz",
+    applicable_licenses = [":xz_license"],
     enable_distributions = ["debian"],
     jars = ["xz/xz-1.9.jar"],
-    applicable_licenses = [":xz_license"],
 )
 
 license(
