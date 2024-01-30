@@ -59,6 +59,7 @@ public final class TargetUtils {
         || tag.startsWith("cpu:")
         || tag.equals(ExecutionRequirements.LOCAL)
         || tag.equals(ExecutionRequirements.WORKER_KEY_MNEMONIC)
+        || tag.equals(ExecutionRequirements.TIMEOUT)
         || tag.startsWith("resources:");
   }
 
